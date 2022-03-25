@@ -1,6 +1,8 @@
 
 #include <algorithm>
+#include <utility>
 #include "sudoku.h"
+#include "drawing_strategies/console_drawing_strategy.h"
 
 void Sudoku::insertNumber(const unsigned int &number, const unsigned int &row,
                           const unsigned int &column) {
@@ -73,3 +75,18 @@ bool Sudoku::checkBlock(const unsigned int &row, const unsigned int &column) {
 void Sudoku::setData(const sudoku_array &data) {
     data_ = data;
 }
+
+const sudoku_array &Sudoku::getData() const {
+    return data_;
+}
+
+Sudoku::Sudoku(SudokuDrawingStrategy drawing_strategy)
+        : drawing(std::move(drawing_strategy)) {
+
+}
+
+Sudoku::Sudoku()
+        : drawing(ConsoleDrawingStrategy) {
+
+}
+
